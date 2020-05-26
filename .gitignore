@@ -1,0 +1,11 @@
+twitter.txt
+
+bin/
+.idea/
+.settings/
+.cache-main
+.classpath
+.project
+*.jar
+*.iml
+*.class
