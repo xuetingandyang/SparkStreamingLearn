@@ -14,6 +14,13 @@ import java.util.concurrent.atomic._
 
 /** Monitors a stream of Apache access logs on port 9999, and prints an alarm
  *  if an excessive ratio of errors is encountered.
+ *  
+ *  To run: download 'ncat.exe' from https://nmap.org/ncat/
+ *  first open cmd, 
+ *  cd to 'SparkStreamingCourse' folder
+ *  run 'ncat -kl 9999 < data\access_log.txt'
+ *  
+ *  then run LOgAlarmer.scala through IDE scala application
  */
 object LogAlarmer {
   
@@ -49,6 +56,7 @@ object LogAlarmer {
       }
     })
     
+
     // Tally up statuses over a 5-minute window sliding every second
     val statusCounts = successFailure.countByValueAndWindow(Seconds(300), Seconds(1))
     

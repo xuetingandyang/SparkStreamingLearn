@@ -46,20 +46,22 @@ object AverageTweetLength {
     // you to safely and efficiently keep track of global state with key/value pairs.
     // We'll do that later in the course.
     
-    lengths.foreachRDD((rdd, time) => {
+    lengths.foreachRDD( (rdd, time) => {
       
       var count = rdd.count()
       if (count > 0) {
         totalTweets.getAndAdd(count)
-        
-        totalChars.getAndAdd(rdd.reduce((x,y) => x + y))
-        
+        totalChars.getAndAdd(rdd.reduce( (x, y) => x + y ))      
         println("Total tweets: " + totalTweets.get() + 
-            " Total characters: " + totalChars.get() + 
-            " Average: " + totalChars.get() / totalTweets.get())
+            " Total characters: " + totalChars.get() +
+            " Average: " + totalChars.get() / totalTweets.get()
+//            " Max length: "
+        )
       }
-    })
+      
+    } )
     
+        
     // Set a checkpoint directory, and kick it all off
     // I could watch this all day!
     ssc.checkpoint("C:/checkpoint/")

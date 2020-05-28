@@ -17,7 +17,7 @@ object SaveTweets {
     setupTwitter()
     
     // Set up a Spark streaming context named "SaveTweets" that runs locally using
-    // all CPU cores and one-second batches of data
+    // all CPU cores and one-second batches of data    
     val ssc = new StreamingContext("local[*]", "SaveTweets", Seconds(1))
     
     // Get rid of log spam (should be called after the context is set up)

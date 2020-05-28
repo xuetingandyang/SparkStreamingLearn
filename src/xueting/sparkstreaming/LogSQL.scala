@@ -11,6 +11,11 @@ import java.util.regex.Pattern
 import java.util.regex.Matcher
 
 import Utilities._
+import org.apache.spark.sql.DataFrameWriter
+
+
+/** Case class for converting RDD to DataFrame */
+case class Record(url: String, status: Int, agent: String)
 
 /** Illustrates using SparkSQL with Spark Streaming, to issue queries on 
  *  Apache log data extracted from a stream on port 9999.
@@ -43,7 +48,7 @@ object LogSQL {
         ("error", 0, "error")
       }
     })
- 
+    
     // Process each RDD from each batch as it comes in
     requests.foreachRDD((rdd, time) => {
       // So we'll demonstrate using SparkSQL in order to query each RDD
@@ -77,6 +82,10 @@ object LogSQL {
       // org.apache.spark.sql.DataFrameWriter class! It can write dataframes via
       // jdbc and many other formats! You can use the "append" save mode to keep
       // adding data from each batch.
+      
+//      wordCountsDataFrame.write.mode("append").json("test")
+//      requestsDataFrame.write.mode("append").json("test")
+     
     })
     
     // Kick it off
@@ -86,7 +95,6 @@ object LogSQL {
   }
 }
 
-/** Case class for converting RDD to DataFrame */
-case class Record(url: String, status: Int, agent: String)
+
 
 
